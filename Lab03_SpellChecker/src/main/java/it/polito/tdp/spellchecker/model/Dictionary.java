@@ -79,70 +79,92 @@ public class Dictionary {
 		}
 		return ritorno;
 	}
-	public List <RichWord> spellCheckTextDicotomic (List <String> inputTextList){
-		List <RichWord> lista= new LinkedList <RichWord>();
+	public List<RichWord> spellCheckTestDichotomic(List<String> imputTextList)
+	{
 		int minimo=0;
 		int massimo=0;
-		if(lingua.equals("Italian")) {
-			
+		List<RichWord> lista=new LinkedList<RichWord>();
+		if(lingua.equals("Italian"))
+		{
 			minimo=0;
 			massimo=paroleIta.size();
 			
-			for(String s: inputTextList) {
+			for(String s:imputTextList)
+			{
 				boolean trovato=false;
-				while(trovato==false) {
-					
-					int meta=(int)(massimo-minimo/2);
-					minimo=0;
-					massimo=paroleIta.size();
+				minimo=0;
+				massimo=paroleIta.size();
+				while(trovato==false)
+				{	
+					int diviso=(int)((massimo-minimo)/2);
+					int meta=diviso+minimo;
 					String parolaMeta=paroleIta.get(meta);
-					if(parolaMeta.equals(s)) {
-					RichWord parolaOkay= new RichWord(s, true);
-					lista.add(parolaOkay);
-					trovato=true;
-					
-				}
-				else if(s.compareTo(parolaMeta)>0) {
-					
-					minimo=meta;
-					massimo=paroleIta.size();
-					
-				}
-				else {
-					massimo=meta;
-									}
-		}}
-		}
-		else if(lingua.equals("English")) {
+					if(parolaMeta.equals(s))
+					{
+						RichWord parolaOK=new RichWord(s,true);
+						lista.add(parolaOK);
+						trovato=true;
+					}
+					else if(s.compareTo(parolaMeta.toLowerCase())>0)
+					{
+						minimo=meta;
+						massimo=massimo;
+					}
+					else
+					{
+						massimo=meta;
+						minimo=minimo;
+					}
+					if(diviso==0 && trovato==false)
+					{
+						RichWord parolaNO=new RichWord(s,false);
+						lista.add(parolaNO);
+						trovato=true;
+					}
+				
+				}	
+			}
+		}else if(lingua.equals("English"))
+		{
 			minimo=0;
 			massimo=paroleEng.size();
 			
-			for(String s: inputTextList) {
+			for(String s:imputTextList)
+			{
 				boolean trovato=false;
-				while(trovato==false) {
-					
-					int meta=(int)(massimo-minimo/2);
-					minimo=0;
-					massimo=paroleIta.size();
+				minimo=0;
+				massimo=paroleEng.size();
+				while(trovato==false)
+				{	
+					int diviso=(int)((massimo-minimo)/2);
+					int meta=diviso+minimo;
 					String parolaMeta=paroleEng.get(meta);
-					if(parolaMeta.equals(s)) {
-					RichWord parolaOkay= new RichWord(s, true);
-					lista.add(parolaOkay);
-					trovato=true;
-					
-				}
-				else if(s.compareTo(parolaMeta)>0) {
-					
-					minimo=meta;
-					massimo=paroleEng.size();
-					
-				}
-				else {
-					massimo=meta;
-									}
-		}}
+					if(parolaMeta.equals(s))
+					{
+						RichWord parolaOK=new RichWord(s,true);
+						lista.add(parolaOK);
+						trovato=true;
+					}
+					else if(s.compareTo(parolaMeta.toLowerCase())>0)
+					{
+						minimo=meta;
+						massimo=massimo;
+					}
+					else
+					{
+						massimo=meta;
+						minimo=minimo;
+					}
+					if(diviso==0 && trovato==false)
+					{
+						RichWord parolaNO=new RichWord(s,false);
+						lista.add(parolaNO);
+						trovato=true;
+					}
+				
+				}	
+			}
 		}
 		return lista;
-	
-	}
+		}
 }

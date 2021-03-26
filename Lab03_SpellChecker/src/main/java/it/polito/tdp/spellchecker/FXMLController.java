@@ -59,7 +59,7 @@ public class FXMLController {
 
     @FXML
     void doSpell(ActionEvent event) {
-    	List <RichWord> paroleR;
+    	List <RichWord> paroleR=new LinkedList <RichWord>();
     	String inserito= txtInput.getText().toLowerCase();
     	inserito= inserito.replaceAll("\\p{Punct}", "");
     	this.txtResult.setText(inserito);
@@ -71,7 +71,7 @@ public class FXMLController {
     		listaInserito.add(s);
     		
     	}
-    	paroleR=this.model.spellCheckTextLinear(listaInserito);
+    	paroleR=this.model.spellCheckTestDichotomic(listaInserito);
     	List <String> finale= new LinkedList <String>();
     	finale=this.model.paroleSbagliate(paroleR);
     	this.txtNumeroErrori.setText("Ci sono "+finale.size()+" parole sbagliate");
